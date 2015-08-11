@@ -2,7 +2,7 @@
 
 namespace celusion\smsconnexion;
 
-class SMSConneXion{
+class Smsconnexion{
     /**
      * Sends an SMS message (string) to the specified mobile number (string)
      * @return bool Successfully queued by SMSConneXion
