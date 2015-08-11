@@ -2,10 +2,16 @@
 
 namespace celusion\smsconnexion;
 
+use Yii;
+use yii\base\InvalidConfigException;
+use GuzzleHttp\Client;
+use yii\base\InvalidParamException;
+
 class SMSConneXion{
     /**
      * Sends an SMS message (string) to the specified mobile number (string)
      * @return bool Successfully queued by SMSConneXion
+     * @throws InvalidParamException if the `$smsconnexionusername` or `$smsconnexionpassword` parameter is not specified in params
      */
     public static function sendSMS($phone,$message)
     {
@@ -13,12 +19,17 @@ class SMSConneXion{
             // Base URI is used with relative requests
             'base_uri' => 'http://smsc.smsconnexion.com/api',
         ]);
+        if (!isset(Yii::$app->params['smsconnexionusername']) || ! isset(Yii::$app->params['smsconnexionpassword'])){
+            throw new InvalidParamException('Both the username and password you got from SMSConneXion.com must be specified in smsconnexionusername and smsconnexionpassword params in your config');
+        }
+        $smsusername = Yii::$app->params['smsconnexionusername'];
+        $smspassword = Yii::$app->params['smsconnexionpassword'];
         $response = $client->get('http://smsc.smsconnexion.com/api/gateway.aspx',
             ['query'=>
                 [
                     'action'=>'send'
-                    ,'username'=>static::SMS_USERNAME
-                    ,'passphrase'=>static::SMS_PASSWORD
+                    ,'username'=>$smsusername
+                    ,'passphrase'=>$smspassword
                     ,'phone'=>$phone
                     ,'message'=>$message
                 ]
