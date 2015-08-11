@@ -42,7 +42,7 @@ Once the extension is installed, simply use it in your code by :
 
 use celusion\smsconnexion\SMSConneXion;
 
-//This sends the SMS messaget hello world to the mobile phone number 1234567890
+//This sends the SMS message hello world to the mobile phone number 1234567890
 SMSConneXion::sendSMS('1234567890','hello world');
 
 ```
