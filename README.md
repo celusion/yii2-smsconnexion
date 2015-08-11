@@ -23,6 +23,15 @@ or add
 
 to the require section of your `composer.json` file.
 
+Then, in your `params.php` file add the following params:
+```php
+    'smsconnexionusername' => '<Username>',
+    'smsconnexionpassword' => '<YourPassword>',
+```
+
+Replace `<Username>` and `<YourPassword>` with the passwords you got after you signed up, of course!
+
+
 
 Usage
 -----
